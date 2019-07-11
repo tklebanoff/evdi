@@ -3,7 +3,7 @@
  * evdi_cursor.c
  *
  * Copyright (c) 2016 The Chromium OS Authors
- * Copyright (c) 2016 - 2017 DisplayLink (UK) Ltd.
+ * Copyright (c) 2016 - 2019 DisplayLink (UK) Ltd.
  *
  * This program is free software; you can redistribute  it and/or modify it
  * under  the terms of  the GNU General  Public License as published by the
@@ -239,7 +239,7 @@ int evdi_cursor_compose_and_copy(struct evdi_cursor *cursor,
 			cursor_pix = h_cursor_w+x +
 				    (h_cursor_h+y)*cursor->width;
 			curs_val = le32_to_cpu(cursor_buffer[cursor_pix]);
-			fbsrc = (int *)efb->obj->vmapping;
+			fbsrc = (int *)(efb->obj->vmapping + fb->offsets[0]);
 			fb_value = *(fbsrc + ((fb->pitches[0]>>2) *
 						  mouse_pix_y + mouse_pix_x));
 			cmd_offset = (buf_byte_stride * mouse_pix_y) +
